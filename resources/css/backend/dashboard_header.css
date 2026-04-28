@@ -1,0 +1,113 @@
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* ================= Sidebar ================= */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            background: #020617;
+            padding-top: 20px;
+            border-right: 1px solid #1e293b;
+        }
+
+        .sidebar h4 {
+            color: #38bdf8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            color: #94a3b8;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 8px;
+            margin: 5px 10px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #1e293b;
+            color: #fff;
+            padding-left: 25px;
+        }
+
+        /* ================= Content ================= */
+        .content {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= Header ================= */
+        .header {
+            background: #020617;
+            padding: 15px 25px;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header input {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            color: #fff;
+        }
+
+        .header .user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ================= Footer ================= */
+        .footer {
+            background: #020617;
+            padding: 10px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* ================= Cards ================= */
+        .card {
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+
+        /* ================= Buttons ================= */
+        .btn-custom {
+            background: #38bdf8;
+            color: #000;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background: #0ea5e9;
+        }
+
+        /* Scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 10px;
+        }

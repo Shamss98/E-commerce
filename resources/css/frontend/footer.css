@@ -1,0 +1,12 @@
+
+.list-unstyled li a,
+.list-unstyled li button {
+    transition: all 0.3s ease;
+}
+
+.list-unstyled li a:hover,
+.list-unstyled li button:hover {
+    color: #0d6efd !important;
+    padding-left: 5px;
+    text-decoration: underline !important; 
+}
