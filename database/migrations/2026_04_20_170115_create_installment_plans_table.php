@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('installment_plans', function (Blueprint $table) {
             $table->id();
+            
             $table->integer('months');
             $table->decimal('interest_rate', 10, 2);
             $table->boolean('is_active')->default(true);

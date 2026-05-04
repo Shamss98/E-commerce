@@ -18,12 +18,26 @@
         @if ($products->count())
             <div class="row g-4">
                 @forelse($products as $product)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="card h-100 shadow-sm border-0">
 
                             {{-- Product Image --}}
-                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top"
-                                style="height: 200px; object-fit: contain;" alt="{{ $product->name }}">
+                                      {{-- Image --}}
+                        <a class="" href="{{ route('products.show', $product->slug) }}">
+                        <div class="overflow-hidden rounded-top text-center p-3">
+                            @if ($product->image)
+                                <img src="{{ asset('storage/' . $product->image) }}"
+                                    class="img-fluid"
+                                    style="height:170px; width:100%; object-fit:contain;"
+                                    alt="{{ $product->name }}">
+                            @else
+                                <img src="{{ asset('images/default-category.png') }}"
+                                    class="img-fluid"
+                                    style="height:150px; width:120px; object-fit:contain;"
+                                    alt="{{ $product->name }}">
+                            @endif
+                        </div>
+                        </a>
 
                             <div class="card-body d-flex flex-column">
 
@@ -39,8 +53,8 @@
                                 {{-- Discount --}}
                                 @if ($product->discount > 0)
                                     <span class="fw-bold text-danger fs-5">
-                                        ${{ $product->discounted_price }}
-                                        <del class="text-muted fs-6">${{ $product->price }}</del>
+                                        {{number_format($product->discounted_price, 2)}} L.E
+                                        <del class="text-muted fs-6">{{number_format($product->price, 2)}} L.E</del>
                                     </span>
                                 @else
                                     <span class="fw-bold text-primary fs-5">
@@ -66,14 +80,12 @@
 
             {{-- Pagination --}}
             <div class="mt-5 d-flex justify-content-center">
-                {{ $products->links() }}
+                {{ $products->links('pagination::bootstrap-5') }}
             </div>
-
-            {{ $products->links() }}
         @else
-            <p>No results found</p>
+            <div class="col-12 text-center">
+                <p class="fs-5 text-muted">No results found</p>
+            </div>
         @endif
-
     </div>
-
 @endsection

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class CategoryController extends Controller
 {
     use BulkActionTrait;
-    protected $categoryService;
+    protected CategoryService $categoryService;
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
@@ -40,13 +40,13 @@ public function index()
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
 }
-    public function show($id)
+    public function show(int $id)
     {
         $category = Category::findOrFail($id);
         return view('dashboard.categories.show', compact('category'));
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $category = Category::findOrFail($id);
         return view('dashboard.categories.edit', compact('category'));
@@ -69,7 +69,7 @@ public function index()
         return redirect()->route('dashboard.categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $category = Category::findOrFail($id);
         if ($category->image) {

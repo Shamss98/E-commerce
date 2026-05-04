@@ -9,6 +9,7 @@ class ProductService
 {
     public function createProduct(array $data)
     {
+        // dd($data);
         $slug = Str::slug($data['name']);
         $originalSlug = $slug;
         $counter = 1;

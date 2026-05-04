@@ -77,24 +77,20 @@ class ProductsController extends Controller
     {
         $query = request('q');
 
-        if (!$query) {
-            return redirect()->back();
-        }
         $products = Product::with('category')
             ->where('status', 1)
             ->where(function ($q2) use ($query) {
                 $q2->where('name', 'like', "%$query%")
-                ->orWhere('category_id', 'like', "%$query%")
-                ->orWhere('description', 'like', "%$query%");
+                    ->orWhere('description', 'like', "%$query%")
+                    ->orWhereHas('category', function ($q3) use ($query) {
+                        $q3->where('name', 'like', "%$query%");
+                    });
             })
             ->latest()
-            ->paginate(12)
+            ->paginate(8)
             ->appends(['q' => $query]);
 
-        $count = Product::where('created_at', '>', now()->subDays(7))
-            ->where('status', 1)
-            ->count();
-
+        $count = Product::where('CREATED_AT', '>', now()->subDays(7))->where('status', 1)->count();
         return view('frontend.products.search', compact('products', 'count'));
     }
 }

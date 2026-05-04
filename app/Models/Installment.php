@@ -18,10 +18,10 @@ class Installment extends Model
     {
         return $this->hasMany(InstallmentPayment::class);
     }
-    // public function order()
-    // {
-    //     return $this->belongsTo(Order::class);
-    // }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

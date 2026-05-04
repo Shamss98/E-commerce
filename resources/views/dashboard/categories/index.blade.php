@@ -82,7 +82,7 @@
 
                                         <!-- Image -->
                                         <td>
-                                            <img src="{{ $category->image }}" class="rounded-circle border shadow-sm"
+                                            <img src="{{asset('storage/'.$category->image) ??  $category->image }}" class="rounded-circle border shadow-sm"
                                                 style="width:50px;height:50px;object-fit:cover;">
                                         </td>
 

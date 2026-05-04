@@ -89,10 +89,18 @@
                                         </td>
 
                                         <!-- Image -->
-                                        <td>
-                                             <img src="{{ asset('storage/' . $product->image) }}"
+                                        <td class="align-middle text-center">
+
+                                            @if ($product->image)
+                                                <img src="{{ asset('storage/' . $product->image) }}"
                                                     class="img-thumbnail shadow-sm"
-                                                style="width:50px;height:50px;object-fit:cover;">
+                                                    style="width: 50px; height: 50px; object-fit: cover;"
+                                                    alt="{{ $product->name }}">
+                                            @else
+                                                <img src="{{ asset('images/default-category.png') }}"
+                                                    class="img-thumbnail opacity-75"
+                                                    style="width: 80px; height: 80px; object-fit: cover;" alt="No Image">
+                                            @endif
                                         </td>
 
                                         <!-- Name -->

@@ -36,12 +36,12 @@
 
                 @if ($product->discount > 0)
                     <span class="fw-bold text-danger fs-5">
-                        ${{ $product->discounted_price }}
-                        <del class="text-muted fs-6">${{ $product->price }}</del>
+                        {{number_format($product->discounted_price, 2)}} L.E
+                        <del class="text-muted fs-6">{{number_format($product->price, 2)}} L.E </del>
                     </span>
                 @else
                     <span class="fw-bold text-primary fs-5">
-                        ${{ $product->price }}
+                        ${{number_format($product->price, 2) }}
                     </span>
                 @endif
 

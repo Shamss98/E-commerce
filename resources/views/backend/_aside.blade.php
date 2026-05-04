@@ -120,6 +120,10 @@
         <a href="{{ route('admin.users.create') }}" class="d-block py-1">
             Create User
         </a>
+
     </div>
+    <a href="{{ route('admin.products.count') }}"> <i class="fa-solid fa-box"></i>Products Count</a>
+
+    <a href="{{ route('home') }}"><i class="fa-solid fa-arrow-left"></i>Go to website</a>
 
 </div>

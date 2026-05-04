@@ -15,7 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ProductController extends Controller
 {
     use BulkActionTrait;
-    protected $productService;
+    protected ProductService $productService;
     public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
@@ -27,7 +27,7 @@ class ProductController extends Controller
             ->paginate(8);
         return view('dashboard.products.index', compact('products'));
     }
-    public function show($slug)
+    public function show(int $slug)
     {
         $product = Product::with('category')->where('slug', $slug)->firstOrFail();
         return view('dashboard.products.show', compact('product'));
@@ -61,7 +61,7 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('products', 'public');
         }
         $this->productService->updateProduct($product, $data);
-        return redirect()->route('dashboard.products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
     public function destroy(Product $product)
     {
@@ -79,5 +79,42 @@ class ProductController extends Controller
     public function exportAllProducts()
     {
         return Excel::download(new ProductExport(), 'products.xlsx');
+    }
+    public function search()
+    {
+        $query = request('q');
+
+        $products = Product::with('category')
+            ->where('status', 1)
+            ->where(function ($q2) use ($query) {
+                $q2->where('name', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%")
+                    ->orWhereHas('category', function ($q3) use ($query) {
+                        $q3->where('name', 'like', "%$query%");
+                    });
+            })
+            ->latest()
+            ->paginate(8)
+            ->appends(['q' => $query]);
+
+        return view('dashboard.products.search', compact('products'));
+    }
+    public function productCount()
+    {
+        $products = Product::with('category')
+            ->select('id', 'name', 'stock', 'category_id', 'image', 'status', 'discount', 'category_id')
+            ->latest()
+            ->paginate(48);
+
+        return view('dashboard.products.count', compact('products'));
+    }
+    public function decreaseQuantity($productId, $qty)
+    {
+        $product = Product::find($productId);
+        if ($product->stock >= $qty) {
+            $product->decrement('stock', $qty);
+        } else {
+            return redirect()->back()->with('error', 'Product quantity is not enough');
+        }
     }
 }

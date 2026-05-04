@@ -4,7 +4,7 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                
+
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-header bg-white border-0 py-3">
                         <h4 class="fw-bold text-primary mb-0">
@@ -50,20 +50,18 @@
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0"><i
                                             class="bi bi-telephone"></i></span>
-                                    <input type="tel" name="phone_number" class="form-control border-start-0 ps-0"
+                                    <input type="text" name="phone_number" class="form-control border-start-0 ps-0"
                                         placeholder="e.g. 010XXXXXXXX">
                                 </div>
                                 <div class="form-text small text-muted">We'll only use this for delivery updates.</div>
-                                @error('address')
+                                @error('phone_number')
                                     <div class="invalid-feedback is-invalid">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             {{-- Submit Button --}}
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-success btn-lg rounded-pill shadow-sm py-2 fw-bold">
-                                    Confirm & Place Order <i class="bi bi-arrow-right ms-2"></i>
-                                </button>
+                                <button type="submit" class="btn btn-primary">Place Order</button>
+
                             </div>
                         </form>
                     </div>
