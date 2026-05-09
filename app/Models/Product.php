@@ -18,11 +18,16 @@ class Product extends Model
         'image',
         'status',
         'stock',
+        'min_stock',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function movements()
+    {
+        return $this->hasMany(InventoryMovement::class);
     }
     public function images()
     {

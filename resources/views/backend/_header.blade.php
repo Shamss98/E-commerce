@@ -10,18 +10,41 @@
                 </button>
             </form>
 
-    <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-bell"></i>
+<div class="d-flex align-items-center gap-4">
 
-        <span>{{ auth()->user()->name }}</span>
+    <!-- Notifications -->
+    <div class="dropdown position-relative">
+        <div data-bs-toggle="dropdown" style="cursor:pointer;">
+            <i class="bi bi-bell fs-5"></i>
 
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button class="btn btn-sm btn-outline-light">Logout</button>
-        </form>
+            @if(auth()->user()->unreadNotifications->count() > 0)
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+                    {{ auth()->user()->unreadNotifications->count() }}
+                </span>
+            @endif
+        </div>
 
-
+        <ul class="dropdown-menu dropdown-menu-end">
+            @forelse(auth()->user()->unreadNotifications as $notification)
+                <li class="px-3 py-2">
+                    {{ $notification->data['message'] ?? 'Notification' }}
+                </li>
+            @empty
+                <li class="px-3 py-2 text-muted">No notifications</li>
+            @endforelse
+        </ul>
     </div>
+
+    <!-- User -->
+    <span>{{ auth()->user()->name }}</span>
+
+    <!-- Logout -->
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button class="btn btn-sm btn-outline-light">Logout</button>
+    </form>
+
+</div>
 
 
 </div>

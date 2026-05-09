@@ -89,6 +89,7 @@ class ProductController extends Controller
             ->where(function ($q2) use ($query) {
                 $q2->where('name', 'like', "%$query%")
                     ->orWhere('description', 'like', "%$query%")
+                    ->orWhere('slug', 'like', "%$query%")
                     ->orWhereHas('category', function ($q3) use ($query) {
                         $q3->where('name', 'like', "%$query%");
                     });

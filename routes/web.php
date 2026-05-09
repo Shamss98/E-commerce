@@ -80,6 +80,7 @@ Route::prefix('admin')->name('admin.')->middleware('CheckUser')->group(function 
     Route::post('installment-plans/bulk', [\App\Http\Controllers\Backend\InstallmentPlanController::class, 'bulkDelete'])->name('installment-plans.bulkDelete');
     Route::resource('installment-plans', \App\Http\Controllers\Backend\InstallmentPlanController::class);
     Route::post('installment-plans/{installmentPlan}/soft-delete', [\App\Http\Controllers\Backend\InstallmentPlanController::class, 'softDelete'])->name('installment-plans.softDelete');
+    Route::get('inventories', [\App\Http\Controllers\InventoryMovementController::class, 'index'])->name('inventories.index');
 });
 
 

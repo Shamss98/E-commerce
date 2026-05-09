@@ -64,6 +64,7 @@
                                     <th>#</th>
                                     <th>Image</th>
                                     <th>Name</th>
+                                    <th>Slug</th>
                                     <th>Stock</th>
                                     <th>Price</th>
                                     <th>Category</th>
@@ -98,6 +99,11 @@
                                         <!-- Name -->
                                         <td class="fw-semibold">
                                             {{ $product->name }}
+                                        </td>
+
+                                        <!-- Slug -->
+                                        <td class="fw-semibold">
+                                            {{ $product->slug }}
                                         </td>
 
                                         <!-- Stock -->
