@@ -46,14 +46,14 @@ public function index()
         return view('dashboard.categories.show', compact('category'));
     }
 
-    public function edit(int $id)
-    {
-        $category = Category::findOrFail($id);
-        return view('dashboard.categories.edit', compact('category'));
-    }
+public function edit(Category $category)
+{
+    return view('dashboard.categories.edit', compact('category'));
+}
 
     public function update(CategoryRequest $request, Category $category)
     {
+
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -66,7 +66,7 @@ public function index()
 
         $this->categoryService->updateCategory($category, $data);
 
-        return redirect()->route('dashboard.categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy(int $id)

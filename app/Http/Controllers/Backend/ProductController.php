@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImages;
 use App\Services\Backend\ProductService;
 use App\Traits\BulkActionTrait;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +44,19 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
         }
-        $this->productService->createProduct($data);
+        $product = $this->productService->createProduct($data);
+
+        if($request->hasFile('images')){
+          foreach ($request->file('images') as $image) {
+
+    $path = $image->store('products', 'public');
+
+    ProductImages::create([
+        'product_id' => $product->id,
+        'image_path' => $path,
+    ]);
+}
+        }
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
     public function edit(Product $product)

@@ -70,7 +70,7 @@
                                     <th>Category</th>
                                     <th>Discount</th>
                                     <th>Status</th>
-                                    <th width="180">Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
@@ -91,8 +91,8 @@
 
                                         <!-- Image -->
                                         <td>
-                                             <img src="{{ asset('storage/' . $product->image) }}"
-                                                    class="img-thumbnail shadow-sm"
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                class="img-thumbnail shadow-sm"
                                                 style="width:50px;height:50px;object-fit:cover;">
                                         </td>
 

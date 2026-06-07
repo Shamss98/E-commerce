@@ -53,8 +53,8 @@
             </ul>
 
             <!-- Search -->
-            <form action="{{ route('products.search') }}" method="GET" class="d-flex me-3" role="search">
-                <input class="form-control me-2" type="text" name="q" placeholder="Search Product" aria-label="Search">
+            <form action="{{ route('products.search') }}" method="GET" class="d-flex me-3 mb-2" role="search">
+                <input class="form-control me-2" type="text" name="q" placeholder="Search Product" aria-label="Search" autocomplete="off" autofocus type="search">
                 <button class="btn btn-outline-primary" type="submit">
                     Search
                 </button>

@@ -1,4 +1,4 @@
-@extends( 'backend.layout.app' )
+@extends( 'backend._app' )
 
 @section('title', 'Edit Category')
 
@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('categories.update', $category->slug) }}" method="POST"
+                        <form action="{{ route('admin.categories.update', $category->slug) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -23,6 +23,14 @@
                                 <input type="text" name="name" id="name"
                                     class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $category->name) }}" required>
                                 @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="slug" class="form-label">Slug</label>
+                                <input type="text" name="slug" id="slug"
+                                    class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug', $category->slug) }}" required>
+                                @error('slug')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -42,6 +50,28 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+<div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+
+    <select name="status" id="status"
+        class="form-select @error('status') is-invalid @enderror" required>
+
+        <option value="1"
+            {{ old('status', $category->status) == '1' ? 'selected' : '' }}>
+            Active
+        </option>
+
+        <option value="0"
+            {{ old('status', $category->status) == '0' ? 'selected' : '' }}>
+            Inactive
+        </option>
+
+    </select>
+
+    @error('status')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>

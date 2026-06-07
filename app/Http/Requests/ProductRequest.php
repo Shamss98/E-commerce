@@ -22,6 +22,8 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'discount' => 'nullable|numeric|min:0|max:199999',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|boolean',
             'stock' => 'required|integer|min:0',
             'min_stock' => 'integer',
